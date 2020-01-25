@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/25 07:03:05 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/25 08:10:48 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 DisplayCLI::DisplayCLI(void)
 {
 	std::cout << "DisplayCLI: default construct called" << std::endl;
-	_show_border = true;
-	_show_title = true;
-	_color = 0;
 }
 
 DisplayCLI::DisplayCLI(const DisplayCLI &other)
@@ -46,51 +43,23 @@ DisplayCLI::~DisplayCLI(void)
 **	Operator Overloaders
 */
 
-DisplayCLI		&DisplayCLI::DisplayCLI::operator=(const DisplayCLI &other)
+DisplayCLI		&DisplayCLI::operator=(const DisplayCLI &other)
 {
 	std::cout << "DisplayCLI: operator= overloader called" << std::endl;
-	_show_border = other.get_show_border();
-	_show_title = other.get_show_title();
-	_color = other.get_color();
+	(void)other;
 	return (*this);
 }
 
 /*
 **	Other Member Functions
 */
-bool			DisplayCLI::get_show_border(void) const
-{
-	return (_show_border);
-}
 
-bool			DisplayCLI::get_show_title(void) const
-{
-	return (_show_title);
-}
-
-int				DisplayCLI::get_color(void) const
-{
-	return (_color);
-}
-
-void			DisplayCLI::set_show_border(bool new_show_border)
-{
-	_show_border = new_show_border;
-}
-
-void			DisplayCLI::set_show_title(bool new_show_title)
-{
-	_show_title = new_show_title;
-}
-
-void			DisplayCLI::set_color(int new_color)
-{
-	_color = new_color;
-}
-
-void			DisplayCLI::display_border(WINDOW *win) const
+void			DisplayCLI::display_border(std::string title, WINDOW *win) const
 {
 	box(win, 0, 0);
+	wrefresh(win);
+	waddstr(win, title.c_str());
+	wrefresh(win);
 }
 
 void			DisplayCLI::display_graph(std::string title, int info[]) const
@@ -104,12 +73,12 @@ void			DisplayCLI::display_bar(std::string title, unsigned int percentage) const
 	std::cout << title << "	" << percentage << " %" << std::endl;
 }
 
-void			DisplayCLI::display_info(std::string info) const
+void			DisplayCLI::display_line(std::string title) const
 {
-	std::cout << info << std::endl;
+	std::cout << title << std::endl;
 }
 
-void			DisplayCLI::display_info_2_part(std::string info, std::string secondary_info) const
+void			DisplayCLI::display_line_2(std::string title, std::string info) const
 {
-	std::cout << info << "	" << secondary_info << std::endl;
+	std::cout << title << "	" << info << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:12:32 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/25 06:55:55 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/25 08:08:45 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,42 @@ IMonitorDisplay::~IMonitorDisplay(void)
 IMonitorDisplay		&IMonitorDisplay::operator=(const IMonitorDisplay &other)
 {
 	std::cout << "IMonitorDisplay: = operator overloader called" << std::endl;
-	(void)other;
+	_show_border = other.get_show_border();
+	_show_title = other.get_show_title();
+	_color = other.get_color();
 	return (*this);
 }
 
 /*
 **	Other Member Functions
 */
+
+bool			IMonitorDisplay::get_show_border(void) const
+{
+	return (_show_border);
+}
+
+bool			IMonitorDisplay::get_show_title(void) const
+{
+	return (_show_title);
+}
+
+int				IMonitorDisplay::get_color(void) const
+{
+	return (_color);
+}
+
+void			IMonitorDisplay::set_show_border(bool new_show_border)
+{
+	_show_border = new_show_border;
+}
+
+void			IMonitorDisplay::set_show_title(bool new_show_title)
+{
+	_show_title = new_show_title;
+}
+
+void			IMonitorDisplay::set_color(int new_color)
+{
+	_color = new_color;
+}
