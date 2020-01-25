@@ -1,0 +1,100 @@
+/*
+**	IMonitorDisplays is considered an Abstract Class because it itself cannot
+**	be implemented, but the classes derived from it will need to have these features
+**		-> DisplayCLI & DisplayGUI
+**	wait, hold on. not an abstract class, but an interface class! which is the
+**	same thing as abstract but every method inside it is abstract
+*/
+
+----------------------------------------------------------
+IMonitorDisplay :
+	PUBLIC
+		virtual void	draw_border() = 0
+		virtual void	draw_graph() = 0
+		virtual void	draw_bar() = 0
+		virtual void	draw_info() = 0
+		virtual void	draw_info_2_part() = 0
+
+	PRIVATE	->	maybe the private variable contains the parts that make up a
+				theme, and based on a theme a different initializer is called
+
+		bool	_show_border
+		bool	_show_title
+		int		_primary_color
+
+----------------------------------------------------------
+DisplayCLI : IMonitorDisplay
+
+----------------------------------------------------------
+DisplayGUI : IMonitorDisplay
+
+----------------------------------------------------------
+IMonitorModule :
+	PUBLIC:
+		virtual void	draw() = 0
+
+	PRIVATE:
+		std::string		_title
+		unsigned int	_min_width
+		unsigned int	_min_height
+		bool			static;
+
+----------------------------------------------------------
+ModuleNames : IMonitorModule
+	PUBLIC:
+		tmp
+
+	PRIVATE:
+		std::string		hostname;
+		std::string		username;
+	
+----------------------------------------------------------
+ModuleOSinfo : IMonitorModule
+	PUBLIC:
+		tmp
+
+	PRIVATE:
+		tmp
+
+----------------------------------------------------------
+ModuleDataTime : IMonitorModule
+	PUBLIC:
+		tmp
+
+	PRIVATE:
+		tmp
+
+----------------------------------------------------------
+ModuleCPU : IMonitorModule
+	PUBLIC:
+		tmp
+
+	PRIVATE:
+		tmp
+
+----------------------------------------------------------
+ModuleRAM : IMonitorModule
+	PUBLIC:
+		tmp
+
+	PRIVATE:
+		tmp
+
+----------------------------------------------------------
+ModuleNet : IMonitorModule
+	PUBLIC:
+		tmp
+
+	PRIVATE:
+		tmp
+
+----------------------------------------------------------
+ModuleManager :
+	PUBLIC:
+
+	PRIVATE:
+		unsigned int	_nmodules;
+		unsigned int	_min_width;
+		unsigned int	_min_height;
+
+----------------------------------------------------------
