@@ -6,14 +6,14 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/25 08:10:48 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 01:28:32 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DisplayCLI.hpp"
 #include "IMonitorDisplay.hpp"
 #include <iostream>
-#include <curses.h>
+#include <ncurses.h>
 
 /*
 **	Constructors
@@ -58,7 +58,8 @@ void			DisplayCLI::display_border(std::string title, WINDOW *win) const
 {
 	box(win, 0, 0);
 	wrefresh(win);
-	waddstr(win, title.c_str());
+	wmove(win, 0, 2);
+	wprintw(win, " %s ", title.c_str());
 	wrefresh(win);
 }
 

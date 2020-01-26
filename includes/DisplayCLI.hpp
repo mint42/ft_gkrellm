@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/25 07:58:35 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 00:37:22 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "IMonitorDisplay.hpp"
 #include <string>
-#include <curses.h>
+#include <ncurses.h>
 
 class					DisplayCLI : public IMonitorDisplay
 {

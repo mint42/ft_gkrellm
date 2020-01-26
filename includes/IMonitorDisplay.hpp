@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:12:32 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/25 07:57:05 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 01:41:35 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define IMONITORDISPLAY_HPP
 
 #include <string>
-#include <curses.h>
+#include <ncurses.h>
 
 class						IMonitorDisplay
 {

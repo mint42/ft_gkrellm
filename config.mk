@@ -6,7 +6,7 @@
 #    By: rreedy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 09:39:36 by rreedy            #+#    #+#              #
-#    Updated: 2020/01/25 04:39:30 by rreedy           ###   ########.fr        #
+#    Updated: 2020/01/26 00:34:25 by rreedy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC_DIRS := ./srcs
 SRC_DIRS += ./srcs/modules
 INCLUDE_DIRS := ./includes
 
-CXX := gcc
+CXX := clang++
 CXXFLAGS := -g
 CXXFLAGS += -Wall
 CXXFLAGS += -Wextra
