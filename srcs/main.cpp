@@ -6,19 +6,18 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 02:07:44 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 07:11:54 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "IMonitorDisplay.hpp"
 #include "DisplayCLI.hpp"
-#include "ModuleManager"
 #include <string>
 #include <iostream>
 #include <list>
 #include <cstdlib>
-// #include <exception>
 #include <ncurses.h>
+#include <curses.h>
 
 // modules
 #define NAMES "Names"
@@ -26,47 +25,40 @@
 
 #define USAGE "./ft_gkrellm [--cli/--gui] [modules]"
 
-// only turning it into a list because i assume it will be parsing a config soon
-// but for now it can just take cl args
-
-
 static std::list<std::string>		parse_input(int argc, char **argv)
 {
 	std::list<std::string>	modules;
 
 	if (argc <= 1)
-		throw (InvalidParseException);
-	for (int i = 0; i < argc; i++)
+		throw (std::string(USAGE));
+	for (int i = 1; i < argc; i++)
 	{
 		modules.push_back(std::string(argv[i]));
 	}
 	return (modules);
 }
 
-static void						manage(list<std::string> modules)
+static void						run(std::list<std::string> modules)
 {
-	IMonitorDisplay			*mode = new DisplayCLI();
-	ModuleManager			manager(modules);
+	IMonitorDisplay			*display_mode = new DisplayCLI();
 
-	manager.get_nmodules();
-	manager.create_windows();
-	while (1)
-	{
-	}
+	display_mode->manage_display(modules);
 }
 
-int								main(void)
+int								main(int argc, char **argv)
 {
 	std::list<std::string>	modules;
+//	IMonitorModule			modules(module_names);
 
 	try
 	{
-		modules = parse_input(int argc, char **argv);
+		modules = parse_input(argc, argv);
 	}
-	catch (InvalidParseException)
+	catch (std::string msg)
 	{
-		std::cout << USAGE << std::endl;
+		std::cout << msg << std::endl;
+		return (1);
 	}
-	manage(modules);
+	run(modules);
 	return (0);
 }

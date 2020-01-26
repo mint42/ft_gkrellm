@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:12:32 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 01:41:35 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 07:08:12 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define IMONITORDISPLAY_HPP
 
 #include <string>
+#include <list>
 #include <ncurses.h>
 
 class						IMonitorDisplay
@@ -29,11 +30,12 @@ class						IMonitorDisplay
 		void				set_show_border(bool new_show_border);
 		void				set_show_title(bool new_show_title);
 		void				set_color(int new_color);
-		virtual void		display_border(std::string title, WINDOW *win) const = 0;
-		virtual void		display_graph(std::string title, int info[]) const = 0;
-		virtual void		display_bar(std::string title, unsigned int percentage) const = 0;
-		virtual void		display_line(std::string title) const = 0;
-		virtual void		display_line_2(std::string title, std::string info) const = 0;
+		virtual void		display_border(WINDOW *win, std::string title) const = 0;
+		virtual void		display_graph(WINDOW *win, std::string title, int info[]) const = 0;
+		virtual void		display_bar(WINDOW *win, std::string title, unsigned int percentage) const = 0;
+		virtual void		display_line(WINDOW *win, std::string title) const = 0;
+		virtual void		display_line_2(WINDOW *win, std::string title, std::string info) const = 0;
+		virtual void		manage_display(std::list<std::string> modules) = 0;
 
 	private:
 		bool				_show_border;
