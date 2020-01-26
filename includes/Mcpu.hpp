@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include "IMonitorModule.hpp"
+#include "IMonitorDisplay.hpp"
 
 class Mcpu : virtual public IMonitorModule{
 	public:
@@ -11,7 +12,7 @@ class Mcpu : virtual public IMonitorModule{
 		Mcpu(const Mcpu &);
 		Mcpu & operator = (const Mcpu &);
 		std::string getMName() const;
-		void execute() const;
+		void execute(IMonitorDisplay *display_mode) const;
 };
 
 #endif

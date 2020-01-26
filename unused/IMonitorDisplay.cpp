@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:12:32 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 01:39:33 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 08:41:19 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ IMonitorDisplay::IMonitorDisplay(void)
 	_show_border = true;
 	_show_title = true;
 	_color = 0;
-
-	initscr();					// ncurses: setup alt screen
-	curs_set(FALSE);			// ncurses: hide cursor
-	cbreak();					// ncurses: set noncanonical mode
-	noecho();					// ncurses: disable echoing
-	keypad(stdscr, TRUE);		// ncurses: enable ability to capture multibyte characters
-	nodelay(stdscr, TRUE);		// ncurses: make the getch() function not wait for a character before returning
 }
 
 IMonitorDisplay::IMonitorDisplay(const IMonitorDisplay &other)
@@ -46,8 +39,6 @@ IMonitorDisplay::IMonitorDisplay(const IMonitorDisplay &other)
 IMonitorDisplay::~IMonitorDisplay(void)
 {
 	std::cout << "IMonitorDisplay: Destructor called" << std::endl;
-
-	endwin();			// ncurses: screen destructed
 }
 
 /*

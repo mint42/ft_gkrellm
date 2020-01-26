@@ -6,12 +6,13 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 07:26:46 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 15:38:22 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DisplayCLI.hpp"
 #include "IMonitorDisplay.hpp"
+#include "IMonitorModule.hpp"
 #include <vector>
 #include <iostream>
 #include <unistd.h>
@@ -26,6 +27,13 @@
 DisplayCLI::DisplayCLI(void)
 {
 	std::cout << "DisplayCLI: default construct called" << std::endl;
+
+	initscr();					// ncurses: setup alt screen
+	curs_set(FALSE);			// ncurses: hide cursor
+	cbreak();					// ncurses: set noncanonical mode
+	noecho();					// ncurses: disable echoing
+	keypad(stdscr, TRUE);		// ncurses: enable ability to capture multibyte characters
+	nodelay(stdscr, TRUE);		// ncurses: make the getch() function not wait for a character before returning
 }
 
 DisplayCLI::DisplayCLI(const DisplayCLI &other)
@@ -41,6 +49,8 @@ DisplayCLI::DisplayCLI(const DisplayCLI &other)
 DisplayCLI::~DisplayCLI(void)
 {
 	std::cout << "DisplayCLI: default destructor called" << std::endl;
+
+	endwin();			// ncurses: screen destructed
 }
 
 /*
@@ -58,77 +68,89 @@ DisplayCLI		&DisplayCLI::operator=(const DisplayCLI &other)
 **	Other Member Functions
 */
 
-void			DisplayCLI::display_border(WINDOW *win, std::string title) const
+void			DisplayCLI::display_border(std::string title) const
 {
-	box(win, 0, 0);
-	wrefresh(win);
-	wmove(win, 0, 2);
-	wprintw(win, " %s ", title.c_str());
-	wrefresh(win);
+	unsigned int		cur_height;
+	unsigned int		cur_width;
+
+	box(_cur_win, 0, 0);
+	wrefresh(_cur_win);
+	wmove(_cur_win, 0, 2);
+	wrefresh(_cur_win);
+	wprintw(_cur_win, " %s ", title.c_str());
+	wrefresh(_cur_win);
+
+	getyx(_cur_win, cur_height, cur_width);
+	wmove(_cur_win, cur_height + 2, 3);
+	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_graph(WINDOW *win, std::string title, int info[]) const
+void			DisplayCLI::display_graph(std::string title, int info[]) const
 
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
 
-	getyx(win, cur_height, cur_width);
-	wrefresh(win);
-	wmove(win, cur_height + 2, 3);
 	(void)info;
-	wprintw(win, "%s graph here", title.c_str());
-	wrefresh(win);
+	wprintw(_cur_win, "%s graph here", title.c_str());
+	wrefresh(_cur_win);
+
+	getyx(_cur_win, cur_height, cur_width);
+	wmove(_cur_win, cur_height + 2, 3);
+	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_bar(WINDOW *win, std::string title, unsigned int percentage) const
+void			DisplayCLI::display_bar(std::string title, unsigned int percentage) const
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
 
-	getyx(win, cur_height, cur_width);
-	wrefresh(win);
-	wmove(win, cur_height + 2, 3);
-	wprintw(win, "%s %d%%", title.c_str(), percentage);
-	wrefresh(win);
+	wprintw(_cur_win, "%s %d%%", title.c_str(), percentage);
+	wrefresh(_cur_win);
+
+	getyx(_cur_win, cur_height, cur_width);
+	wmove(_cur_win, cur_height + 2, 3);
+	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_line(WINDOW *win, std::string title) const
+void			DisplayCLI::display_line(std::string title) const
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
 
-	getyx(win, cur_height, cur_width);
-	wrefresh(win);
-	wmove(win, cur_height + 2, 3);
-	wprintw(win, "%s", title.c_str());
-	wrefresh(win);
+	wprintw(_cur_win, "%s", title.c_str());
+	wrefresh(_cur_win);
+
+	getyx(_cur_win, cur_height, cur_width);
+	wmove(_cur_win, cur_height + 2, 3);
+	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_line_2(WINDOW *win, std::string title, std::string info) const
+void			DisplayCLI::display_line_2(std::string title, std::string info) const
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
 
-	getyx(win, cur_height, cur_width);
-	wrefresh(win);
-	wmove(win, cur_height + 2, 3);
-	wprintw(win, "%s %s", title.c_str(), info.c_str());
-	wrefresh(win);
+	wprintw(_cur_win, "%s %s", title.c_str(), info.c_str());
+	wrefresh(_cur_win);
+
+	getyx(_cur_win, cur_height, cur_width);
+	wmove(_cur_win, cur_height + 2, 3);
+	wrefresh(_cur_win);
 }
 
 
-void			DisplayCLI::display(std::vector<WINDOW*> windows, std::list<std::string>modules)
+void			DisplayCLI::display(std::vector<WINDOW*> windows, std::vector<IMonitorModule*>modules)
 {
-	std::list<std::string>::const_iterator	it;
-	std::list<std::string>::const_iterator	ite = modules.end();
-	std::vector<WINDOW*>::const_iterator	wit;
+	std::vector<IMonitorModule*>::const_iterator	it;
+	std::vector<IMonitorModule*>::const_iterator	ite = modules.end();
+	std::vector<WINDOW*>::const_iterator			wit = windows.begin();
 
-	wit = windows.begin();
-	for (it = modules.begin() ; it != ite; it++)
+	for (it = modules.begin(); it != ite; it++)
 	{
-		display_border(*wit, *it);
-		display_line(*wit, *it);
+		_cur_win = *wit;
+		display_border((*it)->getMName());
+		(*it)->execute(this);
 		++wit;
 	}
 }
@@ -138,7 +160,7 @@ std::vector<WINDOW*>		DisplayCLI::make_windows(unsigned int nmodules)
 	std::vector<WINDOW*>	windows;
 	unsigned int			win_height;
 	unsigned int			win_width;
-	unsigned int			mod_win_width = 50;
+	unsigned int			mod_win_width = 80;
 	unsigned int			mod_win_height;
 	unsigned int			new_start;
 
@@ -155,7 +177,7 @@ std::vector<WINDOW*>		DisplayCLI::make_windows(unsigned int nmodules)
 	return (windows);
 }
 
-void			DisplayCLI::manage_display(std::list<std::string> modules)
+void			DisplayCLI::manage_display(std::vector<IMonitorModule*> modules)
 {
 	std::vector<WINDOW*>	windows = make_windows(modules.size());
 

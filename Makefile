@@ -6,7 +6,7 @@
 #    By: rreedy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/13 11:34:50 by rreedy            #+#    #+#              #
-#    Updated: 2020/01/26 06:18:29 by rreedy           ###   ########.fr        #
+#    Updated: 2020/01/26 14:58:54 by rreedy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,12 @@ include config.mk
 # SRCS := $(foreach src_dir, $(SRC_DIRS), $(wildcard $(src_dir)/*.cpp))
 SRCS := srcs/main.cpp
 SRCS += srcs/DisplayCLI.cpp
-SRCS += srcs/IMonitorDisplay.cpp
+SRCS += srcs/Mhu.cpp
+SRCS += srcs/Mos.cpp
+SRCS += srcs/Mdate.cpp
+SRCS += srcs/Mcpu.cpp
+SRCS += srcs/Mram.cpp
+SRCS += srcs/cmd_to_str.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 
 #

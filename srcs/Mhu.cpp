@@ -1,4 +1,7 @@
-#include "../includes/Mhu.hpp"
+#include "config.hpp"
+#include "IMonitorDisplay.hpp"
+#include "cmd_to_str.hpp"
+#include "Mhu.hpp"
 
 Mhu::Mhu() {}
 
@@ -13,12 +16,13 @@ Mhu & Mhu::operator = (const Mhu &) {
 }
 
 std::string Mhu::getMName() const {
-	return "Hostname/username:";
+	return MOD_HU;
 }
 
-void Mhu::execute() const {
+void Mhu::execute(IMonitorDisplay *display_mode) const {
 	char hostname[_POSIX_HOST_NAME_MAX];
 	gethostname(hostname, _POSIX_HOST_NAME_MAX);
 
-	std::cout << hostname << std::endl << getenv("USER") << std::endl;
+	display_mode->display_line_2("Hostname", hostname);
+	display_mode->display_line_2("Username", getenv("USER"));
 }

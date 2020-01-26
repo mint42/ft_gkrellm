@@ -1,4 +1,8 @@
-#include "../includes/Mram.hpp"
+#include "config.hpp"
+#include "IMonitorDisplay.hpp"
+#include "IMonitorDisplay.hpp"
+#include "cmd_to_str.hpp"
+#include "Mram.hpp"
 
 Mram::Mram() {}
 
@@ -13,10 +17,9 @@ Mram & Mram::operator = (const Mram &) {
 }
 
 std::string Mram::getMName() const {
-	return "RAM:";
+	return MOD_RAM;
 }
 
-void Mram::execute() const {
-	std::system("sysctl -n hw.memsize > dummy.txt");
-	std::cout << "RAM: " << std::ifstream("dummy.txt").rdbuf();
+void Mram::execute(IMonitorDisplay * display_mode) const {
+	display_mode->display_line_2("RAM", cmd_to_str("sysctl -n hw.memsize"));
 }

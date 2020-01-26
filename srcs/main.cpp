@@ -6,39 +6,94 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 07:11:54 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 15:21:31 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "config.hpp"
 #include "IMonitorDisplay.hpp"
 #include "DisplayCLI.hpp"
+#include "DisplayGUI.hpp"
+#include "IMonitorModule.hpp"
+#include "Mhu.hpp"
+#include "Mos.hpp"
+#include "Mdate.hpp"
+#include "Mcpu.hpp"
+#include "Mram.hpp"
 #include <string>
 #include <iostream>
-#include <list>
-#include <cstdlib>
-#include <ncurses.h>
+#include <vector>
 #include <curses.h>
 
-// modules
-#define NAMES "Names"
-#define OSINFO "OS info"
+#define OP_HU 1
+#define OP_OS 2
+#define OP_DT 3
+#define OP_CPU 4
+#define OP_RAM 5
+#define NMODS 5
 
-#define USAGE "./ft_gkrellm [--cli/--gui] [modules]"
+// usage
 
-static std::list<std::string>		parse_input(int argc, char **argv)
+#define USAGE "./ft_gkrellm [--cli/--gui] [Module ID]"
+
+#include <cstdlib>
+
+static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
 {
-	std::list<std::string>	modules;
+	static std::string				all_modules[] =
+	{
+		MOD_HU,
+		MOD_OS,
+		MOD_DT,
+		MOD_CPU,
+		MOD_RAM,
+	};
+	std::vector<IMonitorModule*>		cur_modules;
+	int								param;
 
 	if (argc <= 1)
 		throw (std::string(USAGE));
 	for (int i = 1; i < argc; i++)
 	{
-		modules.push_back(std::string(argv[i]));
+		param = std::atoi(argv[i]);
+		switch (param)
+		{
+			case OP_HU:
+			{
+				cur_modules.push_back(new Mhu());
+				break ;
+			}
+			case OP_OS:
+			{
+				cur_modules.push_back(new Mos());
+				break ;
+			}
+			case OP_DT:
+			{
+				cur_modules.push_back(new Mdate());
+				break ;
+			}
+			case OP_CPU:
+			{
+				cur_modules.push_back(new Mcpu());
+				break ;
+			}
+			case OP_RAM:
+			{
+				cur_modules.push_back(new Mram());
+				break ;
+			}
+			default:
+			{
+				throw (std::string(USAGE));
+				break ;
+			}
+		}
 	}
-	return (modules);
+	return (cur_modules);
 }
 
-static void						run(std::list<std::string> modules)
+static void							run(std::vector<IMonitorModule*> modules)
 {
 	IMonitorDisplay			*display_mode = new DisplayCLI();
 
@@ -47,8 +102,7 @@ static void						run(std::list<std::string> modules)
 
 int								main(int argc, char **argv)
 {
-	std::list<std::string>	modules;
-//	IMonitorModule			modules(module_names);
+	std::vector<IMonitorModule*>			modules;
 
 	try
 	{

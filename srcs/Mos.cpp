@@ -1,4 +1,7 @@
-#include "../includes/Mos.hpp"
+#include "config.hpp"
+#include "IMonitorDisplay.hpp"
+#include "cmd_to_str.hpp"
+#include "Mos.hpp"
 
 Mos::Mos() {}
 
@@ -13,10 +16,9 @@ Mos & Mos::operator = (const Mos &) {
 }
 
 std::string Mos::getMName() const {
-	return "OS info:";
+	return MOD_OS;
 }
 
-void Mos::execute() const {
-	std::system("sw_vers > dummy.txt");
-	std::cout << std::ifstream("dummy.txt").rdbuf();
+void Mos::execute(IMonitorDisplay *display_mode) const {
+	display_mode->display_line(cmd_to_str("sw_vers"));
 }

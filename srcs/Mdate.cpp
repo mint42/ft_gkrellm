@@ -1,4 +1,7 @@
-#include "../includes/Mdate.hpp"
+#include "config.hpp"
+#include "IMonitorDisplay.hpp"
+#include "cmd_to_str.hpp"
+#include "Mdate.hpp"
 
 Mdate::Mdate() {}
 
@@ -13,10 +16,10 @@ Mdate & Mdate::operator = (const Mdate &) {
 }
 
 std::string Mdate::getMName() const {
-	return "Date/time: ";
+	return MOD_DT;
 }
 
-void Mdate::execute() const {
+void Mdate::execute(IMonitorDisplay *display_mode) const {
 	time_t t = time(NULL);
-	std::cout << ctime(&t);
+	display_mode->display_line(std::string(ctime(&t)));
 }

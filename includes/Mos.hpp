@@ -2,6 +2,7 @@
 #define MOS_HPP
 
 #include "IMonitorModule.hpp"
+#include "IMonitorDisplay.hpp"
 
 class Mos : virtual public IMonitorModule{
 	public:
@@ -10,7 +11,7 @@ class Mos : virtual public IMonitorModule{
 		Mos(const Mos &);
 		Mos & operator = (const Mos &);
 		std::string getMName() const;
-		void execute() const;
+		void execute(IMonitorDisplay *display_mode) const;
 };
 
 #endif

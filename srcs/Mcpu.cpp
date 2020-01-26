@@ -1,4 +1,7 @@
-#include "../includes/Mcpu.hpp"
+#include "config.hpp"
+#include "IMonitorDisplay.hpp"
+#include "cmd_to_str.hpp"
+#include "Mcpu.hpp"
 
 Mcpu::Mcpu() {}
 
@@ -13,14 +16,11 @@ Mcpu & Mcpu::operator = (const Mcpu &) {
 }
 
 std::string Mcpu::getMName() const {
-	return "CPU:";
+	return MOD_CPU;
 }
 
-void Mcpu::execute() const {
-	std::system("sysctl -n machdep.cpu.brand_string > dummy.txt");
-	std::cout << std::ifstream("dummy.txt").rdbuf();
-	std::system("sysctl -n hw.logicalcpu > dummy.txt");
-	std::cout << "Number of Cores: " << std::ifstream("dummy.txt").rdbuf();
-	std::system("top -l 1 | grep 'CPU usage:'");
-	std::cout << "Usage: " << std::ifstream("dummy.txt").rdbuf();
+void Mcpu::execute(IMonitorDisplay *display_mode) const {
+	display_mode->display_line(cmd_to_str("sysctl -n machdep.cpu.brand_string"));
+	display_mode->display_line(cmd_to_str("sysctl -n hw.logicalcpu"));
+	display_mode->display_line(cmd_to_str("top -l 1 | grep 'CPU usage:'"));
 }
