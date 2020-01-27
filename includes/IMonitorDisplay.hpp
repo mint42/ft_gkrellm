@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:12:32 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 17:48:35 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 19:27:18 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <string>
 #include <vector>
 #include <curses.h>
+
+#define PADDING 1
 
 class						IMonitorModule;
 

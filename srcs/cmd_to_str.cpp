@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:48:31 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 15:40:48 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 19:48:20 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,30 @@ std::string		cmd_to_str(const char *command)
 			str.at(newline_pos) = '\0';
 	}
 	return (str);
+}
+
+std::string		cmd_to_str_DummyThicc(const char *command)
+{
+    FILE *f = popen(command, "r");
+    char buffer [4096];
+
+    long i = 0;
+    long o = 0;
+    while (fgets(buffer, 4096, f)) {
+        std::string line(buffer);
+        if(line.find("input") == line.npos && line.find("packets") == line.npos) {
+            long discard;
+            std::stringstream ss(line);
+            ss >> discard;
+            ss >> discard;
+            ss >> i;
+            ss >> discard;
+            ss >> discard;
+            ss >> o;
+            std::stringstream ss2;
+            ss2 << "Input: " << i << " Output: " << o;
+            return (ss2.str());
+        }
+    }
+    return ("");
 }

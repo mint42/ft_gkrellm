@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 18:36:21 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 20:30:42 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,19 @@ static void		show_usage(void)
 
 #include <cstdlib>
 
-static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
+static IMonitorDisplay				*parse_flag(int argc, char **argv)
+{
+	if (argc <= 1)
+		throw (std::string("bad"));
+	if (std::string(argv[1]) == std::string("--cli"))
+		return (new DisplayCLI());
+	if (std::string(argv[1]) == std::string("--gui"))
+		return (new DisplayGUI());
+	throw (std::string("bad"));
+	return (0);
+}
+
+static std::vector<IMonitorModule*>	parse_args(int argc, char **argv)
 {
 	static std::string				all_modules[] =
 	{
@@ -68,9 +80,9 @@ static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
 	std::vector<IMonitorModule*>		cur_modules;
 	int									param;
 
-	if (argc <= 1)
+	if (argc <= 2)
 		throw (std::string("bad"));
-	for (int i = 1; i < argc; i++)
+	for (int i = 2; i < argc; i++)
 	{
 		param = std::atoi(argv[i]);
 		switch (param)
@@ -120,20 +132,15 @@ static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
 	return (cur_modules);
 }
 
-static void							run(std::vector<IMonitorModule*> modules)
-{
-	IMonitorDisplay			*display_mode = new DisplayCLI();
-
-	display_mode->manage_display(modules);
-}
-
 int								main(int argc, char **argv)
 {
 	std::vector<IMonitorModule*>			modules;
+	IMonitorDisplay							*display_mode;
 
 	try
 	{
-		modules = parse_input(argc, argv);
+		modules = parse_args(argc, argv);
+		display_mode = parse_flag(argc, argv);
 	}
 	catch (std::string msg)
 	{
@@ -141,6 +148,6 @@ int								main(int argc, char **argv)
 		show_usage();
 		return (1);
 	}
-	run(modules);
+	display_mode->manage_display(modules);
 	return (0);
 }

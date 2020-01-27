@@ -6,7 +6,7 @@
 /*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 20:02:41 by bpace            ###   ########.fr       */
+/*   Updated: 2020/01/26 20:41:24 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 
 DisplayCLI::DisplayCLI(void)
 {
-	std::cout << "DisplayCLI: default construct called" << std::endl;
-
 	initscr();					// ncurses: setup alt screen
 	curs_set(FALSE);			// ncurses: hide cursor
 	cbreak();					// ncurses: set noncanonical mode
@@ -38,7 +36,6 @@ DisplayCLI::DisplayCLI(void)
 
 DisplayCLI::DisplayCLI(const DisplayCLI &other)
 {
-	std::cout << "DisplayCLI: copy construct called" << std::endl;
 	*this = other;
 }
 
@@ -48,8 +45,6 @@ DisplayCLI::DisplayCLI(const DisplayCLI &other)
 
 DisplayCLI::~DisplayCLI(void)
 {
-	std::cout << "DisplayCLI: default destructor called" << std::endl;
-
 	endwin();			// ncurses: screen destructed
 }
 
@@ -59,7 +54,6 @@ DisplayCLI::~DisplayCLI(void)
 
 DisplayCLI		&DisplayCLI::operator=(const DisplayCLI &other)
 {
-	std::cout << "DisplayCLI: operator= overloader called" << std::endl;
 	(void)other;
 	return (*this);
 }
@@ -152,8 +146,7 @@ void			DisplayCLI::display_line_2(std::string title, std::string info) const
 }
 
 void			DisplayCLI::display_cat(int frame) const
-{
-	unsigned int		height = 1;
+{ unsigned int		height = 1;
 
 
     if (frame == 0) {
