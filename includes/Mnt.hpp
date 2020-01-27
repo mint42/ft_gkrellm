@@ -18,7 +18,7 @@ class Mnt : virtual public IMonitorModule{
 		void Sset(std::string);
 		Mnt & operator = (const Mnt &);
 		std::string getMName() const;
-		void execute();
+		void execute(IMonitorDisplay *display_mode);
 		std::string getS() const ;
 		unsigned int get_height(void) const;
 };

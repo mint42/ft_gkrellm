@@ -50,7 +50,9 @@ void* setS(void* nt) {
     return NULL;
 }
 
-void Mnt::execute(){
+void Mnt::execute(IMonitorDisplay *display_mode)
+{
+	(void)display_mode;
     if (_b) {
         _b = false;
 //        pthread_t id;

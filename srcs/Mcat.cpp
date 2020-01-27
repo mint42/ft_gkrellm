@@ -1,42 +1,31 @@
-#include "../includes/Mcat.hpp"
+#include "Mcat.hpp"
+#include "IMonitorDisplay.hpp"
 
-MCat::MCat() : _frame(0), _height(6) {}
+Mcat::Mcat() : _frame(0), _height(6) {}
 
-MCat::~MCat(){}
+Mcat::~Mcat(){}
 
-MCat::MCat(const MCat &d) {
+Mcat::Mcat(const Mcat &d) {
 	*this = d;
 }
 
-MCat & MCat::operator = (const MCat &rhs) {
+Mcat & Mcat::operator = (const Mcat &rhs) {
     if (this != &rhs) {
         _frame = rhs._frame;
     }
 	return *this;
 }
 
-std::string MCat::getMName() const {
+std::string Mcat::getMName() const {
 	return "Cat!:";
 }
 
-void MCat::execute()  {
-    if (_frame == 0) {
-        std::cout << "      |\\      _,,,---,,_" << std::endl;
-        std::cout << "ZZZzz /,`.-'`'    -.  ;-;;,_" << std::endl;
-        std::cout << "     |,4-  ) )-,_. ,\\ (  `'-'" << std::endl;
-        std::cout << "    '---''(_/--'  `-'\\_)  " << std::endl;
-        _frame = 1;
-    }
-    else {
-        std::cout << "      |\\      " << std::endl;
-        std::cout << "zzzZZ /,`.-'`'_,,,---,,_;,_" << std::endl;
-        std::cout << "     |,4-  ) )-,_. ,\\ (  `'-'" << std::endl;
-        std::cout << "    '---''(_/--'  `-'\\_)  " << std::endl;
-        _frame = 0;
-    }
+void Mcat::execute(IMonitorDisplay *display_mode) {
+	display_mode->display_cat(_frame);
+	_frame = !_frame;
 }
 
-unsigned int	MCat::get_height(void) const
+unsigned int	Mcat::get_height(void) const
 {
 	return (_height);
 }

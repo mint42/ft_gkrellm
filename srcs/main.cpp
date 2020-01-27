@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 15:21:31 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 17:34:10 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include "Mdate.hpp"
 #include "Mcpu.hpp"
 #include "Mram.hpp"
+#include "Mnt.hpp"
+#include "Mcat.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -30,7 +32,9 @@
 #define OP_DT 3
 #define OP_CPU 4
 #define OP_RAM 5
-#define NMODS 5
+#define OP_NET 6
+#define OP_CAT 7
+#define NMODS 7
 
 // usage
 
@@ -49,7 +53,7 @@ static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
 		MOD_RAM,
 	};
 	std::vector<IMonitorModule*>		cur_modules;
-	int								param;
+	int									param;
 
 	if (argc <= 1)
 		throw (std::string(USAGE));
@@ -81,6 +85,16 @@ static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
 			case OP_RAM:
 			{
 				cur_modules.push_back(new Mram());
+				break ;
+			}
+			case OP_NET:
+			{
+				cur_modules.push_back(new Mnt());
+				break ;
+			}
+			case OP_CAT:
+			{
+				cur_modules.push_back(new Mcat());
 				break ;
 			}
 			default:

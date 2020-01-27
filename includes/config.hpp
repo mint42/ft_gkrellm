@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 10:02:03 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 15:13:29 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 17:31:06 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #define MOD_DT "Data/Time"
 #define MOD_CPU "CPU"
 #define MOD_RAM "RAM"
+#define MOD_NET "NETWORK THROUGHPUT"
+#define MOD_CAT "KITTY CAT"
 
 // End Config
 

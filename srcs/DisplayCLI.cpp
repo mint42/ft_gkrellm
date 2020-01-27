@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 17:24:42 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 17:56:11 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,59 @@ void			DisplayCLI::display_line_2(std::string title, std::string info) const
 	wrefresh(_cur_win);
 }
 
+void			DisplayCLI::display_cat(int frame) const
+{
+	unsigned int		height = 1;
+
+	wmove(_cur_win, height, 5);
+	wrefresh(_cur_win);
+
+	std::cout << frame;
+    if (frame == 0) {
+        wprintw(_cur_win, "      |\\      _,,,---,,_");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "ZZZzz /,`.-'`'    -.  ;-;;,_");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "     |,4-  ) )-,_. ,\\ (  `'-'");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "    '---''(_/--'  `-'\\_)  ");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+    }
+    else {
+        wprintw(_cur_win, "      |\\      ");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "zzzZZ /,`.-'`'_,,,---,,_;,_");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "     |,4-  ) )-,_. ,\\ (  `'-'");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "    '---''(_/--'  `-'\\_)  ");
+		wrefresh(_cur_win);
+		++height;
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+    }
+}
 
 void			DisplayCLI::display(std::vector<WINDOW*> windows, std::vector<IMonitorModule*>modules)
 {
@@ -191,6 +244,6 @@ void			DisplayCLI::manage_display(std::vector<IMonitorModule*> modules)
 	while (1)
 	{
 		display(windows, modules);
-		sleep(1);
+		sleep(2);
 	}
 }

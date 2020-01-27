@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:12:32 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 14:45:49 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 17:48:35 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class						IMonitorDisplay
 		virtual void		display_bar(std::string title, unsigned int percentage) const = 0;
 		virtual void		display_line(std::string title) const = 0;
 		virtual void		display_line_2(std::string title, std::string info) const = 0;
+		virtual void		display_cat(int frame) const = 0;
 		virtual void		manage_display(std::vector<IMonitorModule*> modules) = 0;
 };
 

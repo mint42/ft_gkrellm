@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include "IMonitorModule.hpp"
 
-class MCat : virtual public IMonitorModule{
+class Mcat : virtual public IMonitorModule{
 	private:
         int 			_frame;
 
@@ -12,12 +12,12 @@ class MCat : virtual public IMonitorModule{
 		unsigned int	_height;
 
     public:
-		MCat();
-		~MCat();
-		MCat(const MCat &);
-		MCat & operator = (const MCat &);
+		Mcat();
+		~Mcat();
+		Mcat(const Mcat &);
+		Mcat & operator = (const Mcat &);
 		std::string getMName() const;
-		void execute();
+		void execute(IMonitorDisplay *display_mode);
 		unsigned int get_height(void) const;
 };
 
