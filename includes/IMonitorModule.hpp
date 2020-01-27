@@ -6,7 +6,7 @@
 /*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:12:43 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 14:24:25 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 16:33:50 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class			IMonitorModule
 	public:
 		virtual ~IMonitorModule(void) {};
 		virtual std::string getMName(void) const = 0;
-		virtual void execute(IMonitorDisplay *display_mode) const = 0;
+		virtual void execute(IMonitorDisplay *display_mode) = 0;
 };
 
 #endif

@@ -19,7 +19,7 @@ std::string Mdate::getMName() const {
 	return MOD_DT;
 }
 
-void Mdate::execute(IMonitorDisplay *display_mode) const {
+void Mdate::execute(IMonitorDisplay *display_mode) {
 	time_t t = time(NULL);
 	display_mode->display_line(std::string(ctime(&t)));
 }

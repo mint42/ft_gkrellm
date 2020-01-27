@@ -12,7 +12,7 @@ class Mdate : virtual public IMonitorModule{
 		Mdate(const Mdate &);
 		Mdate & operator = (const Mdate &);
 		std::string getMName() const;
-		void execute(IMonitorDisplay *display_mode) const;
+		void execute(IMonitorDisplay *display_mode);
 };
 
 #endif

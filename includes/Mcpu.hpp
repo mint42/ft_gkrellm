@@ -12,7 +12,7 @@ class Mcpu : virtual public IMonitorModule{
 		Mcpu(const Mcpu &);
 		Mcpu & operator = (const Mcpu &);
 		std::string getMName() const;
-		void execute(IMonitorDisplay *display_mode) const;
+		void execute(IMonitorDisplay *display_mode);
 };
 
 #endif

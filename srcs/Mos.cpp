@@ -19,6 +19,6 @@ std::string Mos::getMName() const {
 	return MOD_OS;
 }
 
-void Mos::execute(IMonitorDisplay *display_mode) const {
+void Mos::execute(IMonitorDisplay *display_mode) {
 	display_mode->display_line(cmd_to_str("sw_vers"));
 }

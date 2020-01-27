@@ -11,7 +11,7 @@ class Mhu : virtual public IMonitorModule{
 		Mhu(const Mhu &);
 		Mhu & operator = (const Mhu &);
 		std::string getMName() const;
-		void execute(IMonitorDisplay *display_mode) const;
+		void execute(IMonitorDisplay *display_mode);
 };
 
 #endif

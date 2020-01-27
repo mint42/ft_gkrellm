@@ -20,6 +20,6 @@ std::string Mram::getMName() const {
 	return MOD_RAM;
 }
 
-void Mram::execute(IMonitorDisplay * display_mode) const {
+void Mram::execute(IMonitorDisplay * display_mode) {
 	display_mode->display_line_2("RAM", cmd_to_str("sysctl -n hw.memsize"));
 }

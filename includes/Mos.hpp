@@ -11,7 +11,7 @@ class Mos : virtual public IMonitorModule{
 		Mos(const Mos &);
 		Mos & operator = (const Mos &);
 		std::string getMName() const;
-		void execute(IMonitorDisplay *display_mode) const;
+		void execute(IMonitorDisplay *display_mode);
 };
 
 #endif

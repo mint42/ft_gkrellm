@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 15:38:22 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 16:33:34 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ void			DisplayCLI::display_border(std::string title) const
 	unsigned int		cur_height;
 	unsigned int		cur_width;
 
-	box(_cur_win, 0, 0);
+	wmove(_cur_win, 0, 0);
+	wrefresh(_cur_win);
+
+	start_color();
+	init_pair(1, COLOR_BLACK, COLOR_CYAN);
+	whline(_cur_win, 0, 80);
 	wrefresh(_cur_win);
 	wmove(_cur_win, 0, 2);
 	wrefresh(_cur_win);
@@ -96,7 +101,7 @@ void			DisplayCLI::display_graph(std::string title, int info[]) const
 	wrefresh(_cur_win);
 
 	getyx(_cur_win, cur_height, cur_width);
-	wmove(_cur_win, cur_height + 2, 3);
+	wmove(_cur_win, cur_height + 1, 3);
 	wrefresh(_cur_win);
 }
 
@@ -109,7 +114,7 @@ void			DisplayCLI::display_bar(std::string title, unsigned int percentage) const
 	wrefresh(_cur_win);
 
 	getyx(_cur_win, cur_height, cur_width);
-	wmove(_cur_win, cur_height + 2, 3);
+	wmove(_cur_win, cur_height + 1, 3);
 	wrefresh(_cur_win);
 }
 
@@ -122,7 +127,7 @@ void			DisplayCLI::display_line(std::string title) const
 	wrefresh(_cur_win);
 
 	getyx(_cur_win, cur_height, cur_width);
-	wmove(_cur_win, cur_height + 2, 3);
+	wmove(_cur_win, cur_height + 1, 3);
 	wrefresh(_cur_win);
 }
 
@@ -135,7 +140,7 @@ void			DisplayCLI::display_line_2(std::string title, std::string info) const
 	wrefresh(_cur_win);
 
 	getyx(_cur_win, cur_height, cur_width);
-	wmove(_cur_win, cur_height + 2, 3);
+	wmove(_cur_win, cur_height + 1, 3);
 	wrefresh(_cur_win);
 }
 
@@ -184,6 +189,6 @@ void			DisplayCLI::manage_display(std::vector<IMonitorModule*> modules)
 	while (1)
 	{
 		display(windows, modules);
-		sleep(5);
+		sleep(1);
 	}
 }

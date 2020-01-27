@@ -19,7 +19,7 @@ std::string Mhu::getMName() const {
 	return MOD_HU;
 }
 
-void Mhu::execute(IMonitorDisplay *display_mode) const {
+void Mhu::execute(IMonitorDisplay *display_mode) {
 	char hostname[_POSIX_HOST_NAME_MAX];
 	gethostname(hostname, _POSIX_HOST_NAME_MAX);
 

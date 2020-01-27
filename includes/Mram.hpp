@@ -11,7 +11,7 @@ class Mram : virtual public IMonitorModule{
 		Mram(const Mram &);
 		Mram & operator = (const Mram &);
 		std::string getMName() const;
-		void execute(IMonitorDisplay *display_mode) const;
+		void execute(IMonitorDisplay *display_mode);
 };
 
 #endif
