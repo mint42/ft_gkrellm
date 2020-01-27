@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DisplayCLI.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 17:56:11 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 18:19:08 by bpace            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ void			DisplayCLI::display_cat(int frame) const
 	wmove(_cur_win, height, 5);
 	wrefresh(_cur_win);
 
-	std::cout << frame;
     if (frame == 0) {
         wprintw(_cur_win, "      |\\      _,,,---,,_");
 		wrefresh(_cur_win);
@@ -182,12 +181,12 @@ void			DisplayCLI::display_cat(int frame) const
 		wrefresh(_cur_win);
     }
     else {
-        wprintw(_cur_win, "      |\\      ");
+        wprintw(_cur_win, "      |\\                ");
 		wrefresh(_cur_win);
 		++height;
 		wmove(_cur_win, height, 5);
 		wrefresh(_cur_win);
-        wprintw(_cur_win, "zzzZZ /,`.-'`'_,,,---,,_;,_");
+        wprintw(_cur_win, "zzzZZ /,`.-'`'\u00AF'''\u00AF\u00AF\u00AF';-;;,_");
 		wrefresh(_cur_win);
 		++height;
 		wmove(_cur_win, height, 5);
