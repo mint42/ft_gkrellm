@@ -6,7 +6,7 @@
 /*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 23:15:56 by bpace            ###   ########.fr       */
+/*   Updated: 2020/01/27 00:23:41 by bpace            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "Mnt.hpp"
 #include "Mcat.hpp"
 #include "Mip.hpp"
+#include "Mserial.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -36,7 +37,8 @@
 #define OP_NET 6
 #define OP_CAT 7
 #define OP_IP 8
-#define NMODS 8
+#define OP_SERIAL 9
+#define NMODS 9
 
 // usage
 
@@ -52,6 +54,8 @@ static void		show_usage(void)
 	std::cout << OP_RAM << "    " << MOD_RAM << std::endl;
 	std::cout << OP_NET << "    " << MOD_NET << std::endl;
 	std::cout << OP_CAT << "    " << MOD_CAT << std::endl;
+	std::cout << OP_IP << "    " << MOD_IP << std::endl;
+	std::cout << OP_SERIAL << "    " << MOD_SERIAL << std::endl;
 	std::cout << std::endl;
 }
 
@@ -128,6 +132,10 @@ static std::vector<IMonitorModule*>	parse_args(int argc, char **argv)
 			{
 				cur_modules.push_back(new Mip());
 				break;
+			}
+			case OP_SERIAL:
+			{
+				cur_modules.push_back(new Mserial());
 			}
 			default:
 			{

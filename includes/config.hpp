@@ -6,7 +6,7 @@
 /*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 10:02:03 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 23:22:54 by bpace            ###   ########.fr       */
+/*   Updated: 2020/01/27 00:19:58 by bpace            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #define MOD_NET "NETWORK THROUGHPUT"
 #define MOD_CAT "KITTY CAT"
 #define MOD_IP "GRAPHICS"
+#define MOD_SERIAL "SERIAL"
 
 // End Config
 
