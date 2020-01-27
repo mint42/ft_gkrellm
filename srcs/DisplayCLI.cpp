@@ -6,7 +6,7 @@
 /*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 18:19:08 by bpace            ###   ########.fr       */
+/*   Updated: 2020/01/26 20:02:41 by bpace            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void			DisplayCLI::display_border(std::string title) const
 	wmove(_cur_win, 0, 0);
 	wrefresh(_cur_win);
 
-//	start_color();
-//	init_pair(1, COLOR_BLACK, COLOR_CYAN);
-//	attron(COLOR_PAIR(1));
+	start_color();
+	init_pair(1, COLOR_BLACK, COLOR_CYAN);
+	wattron(_cur_win, COLOR_PAIR(1));
 //	box(_cur_win, 0, 0);
 //	touchwin(_cur_win);
 	whline(_cur_win, 0, 80);
 	wrefresh(_cur_win);
-//	attroff(COLOR_PAIR(1));
+	attroff(COLOR_PAIR(1));
 	wmove(_cur_win, 0, 2);
 	wrefresh(_cur_win);
 	wprintw(_cur_win, " %s ", title.c_str());
@@ -155,16 +155,16 @@ void			DisplayCLI::display_cat(int frame) const
 {
 	unsigned int		height = 1;
 
-	wmove(_cur_win, height, 5);
-	wrefresh(_cur_win);
 
     if (frame == 0) {
-        wprintw(_cur_win, "      |\\      _,,,---,,_");
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "      |\\      _,,,---,,_     ");
 		wrefresh(_cur_win);
 		++height;
 		wmove(_cur_win, height, 5);
 		wrefresh(_cur_win);
-        wprintw(_cur_win, "ZZZzz /,`.-'`'    -.  ;-;;,_");
+        wprintw(_cur_win, "ZZZzz /,`.-'`'    -.  ;-;;,_ ");
 		wrefresh(_cur_win);
 		++height;
 		wmove(_cur_win, height, 5);
@@ -174,32 +174,28 @@ void			DisplayCLI::display_cat(int frame) const
 		++height;
 		wmove(_cur_win, height, 5);
 		wrefresh(_cur_win);
-        wprintw(_cur_win, "    '---''(_/--'  `-'\\_)  ");
-		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
+        wprintw(_cur_win, "    '---''(_/--'  `-'\\_)     ");
 		wrefresh(_cur_win);
     }
     else {
-        wprintw(_cur_win, "      |\\                ");
+		wmove(_cur_win, height, 5);
+		wrefresh(_cur_win);
+        wprintw(_cur_win, "       /|                    ");
 		wrefresh(_cur_win);
 		++height;
 		wmove(_cur_win, height, 5);
 		wrefresh(_cur_win);
-        wprintw(_cur_win, "zzzZZ /,`.-'`'\u00AF'''\u00AF\u00AF\u00AF';-;;,_");
+        wprintw(_cur_win, "zzzZZ /,`.-'`'\u00AF'''\u00AF\u00AF\u00AF';-;;,_ ");
 		wrefresh(_cur_win);
 		++height;
 		wmove(_cur_win, height, 5);
 		wrefresh(_cur_win);
-        wprintw(_cur_win, "     |,4-  ) )-,_. ,\\ (  `'-'");
+        wprintw(_cur_win, "     |,4-  ) )-,_. ,\\ (\u00AF `'-'");
 		wrefresh(_cur_win);
 		++height;
 		wmove(_cur_win, height, 5);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "    '---''(_/--'  `-'\\_)  ");
-		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
 		wrefresh(_cur_win);
     }
 }
