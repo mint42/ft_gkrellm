@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:02 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 20:21:41 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:30:35 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,46 +48,71 @@ DisplayGUI		&DisplayGUI::operator=(const DisplayGUI &other)
 **	Other Member Functions
 */
 
-void			DisplayGUI::display_border(std::string title) const
+void			DisplayGUI::display_border(std::string title)
 {
-	(void)title;
+	sf::Text	text;
+	sf::Font	font;
+
+	text.setFont(_font);
+	text.setString(title);
+	text.setPosition(5, _cur_pos);
+	_window.draw(text);
+
+	_cur_pos += (text.getLocalBounds().height * 2);
 }
 
-void			DisplayGUI::display_graph(std::string title, int info[]) const
+void			DisplayGUI::display_graph(std::string title, int info[])
 {
 	(void)title;
 	(void)info;
 }
 
-void			DisplayGUI::display_bar(std::string title, unsigned int percentage) const
+void			DisplayGUI::display_bar(std::string title, unsigned int percentage)
 {
 	(void)title;
 	(void)percentage;
 }
 
-void			DisplayGUI::display_line(std::string title) const
+void			DisplayGUI::display_line(std::string title)
 {
-	(void)title;
+	sf::Text	text;
+
+	text.setFont(_font);
+	text.setString(title);
+	text.setPosition(5, _cur_pos);
+	_window.draw(text);
+
+	_cur_pos += (text.getLocalBounds().height * 2);
 }
 
-void			DisplayGUI::display_line_2(std::string title, std::string info) const
+void			DisplayGUI::display_line_2(std::string title, std::string info)
 {
-	(void)title;
-	(void)info;
+	sf::Text	text;
+	sf::Text	text_info;
+
+	text.setFont(_font);
+	text.setString(title);
+	text.setPosition(5, _cur_pos);
+	_window.draw(text);
+	text_info.setFont(_font);
+	text_info.setString(info);
+	text_info.setPosition(text.getLocalBounds().width * 5, _cur_pos);
+	_window.draw(text_info);
+
+	_cur_pos += (text.getLocalBounds().height * 2);
 }
 
-void			DisplayGUI::display_cat(int frame) const
+void			DisplayGUI::display_cat(int frame)
 {
 	(void)frame;
 }
 
-void			DisplayGUI::display(sf::RenderWindow &window, std::vector<unsigned int> sub_windows, std::vector<IMonitorModule*>modules)
+void			DisplayGUI::display(std::vector<unsigned int> sub_windows, std::vector<IMonitorModule*>modules)
 {
 	std::vector<IMonitorModule*>::const_iterator	it;
 	std::vector<IMonitorModule*>::const_iterator	ite = modules.end();
 	std::vector<unsigned int>::const_iterator		wit = sub_windows.begin();
 
-	(void)window;
 	for (it = modules.begin(); it != ite; it++)
 	{
 		_cur_pos = *wit;
@@ -115,21 +140,21 @@ std::vector<unsigned int>     DisplayGUI::make_sub_windows(std::vector<IMonitorM
 
 void			DisplayGUI::manage_display(std::vector<IMonitorModule*> modules)
 {
-	sf::RenderWindow			window(sf::VideoMode(800, 600), "ft_gkrellm");
 	std::vector<unsigned int>	sub_windows = make_sub_windows(modules);
-	sf::CircleShape		shape(100.f);
 
-	while (window.isOpen())
+	if (!_font.loadFromFile("./FontTrebuchetMS.ttf"))
+		return ;
+	_window.create(sf::VideoMode(1000, 2000), "ft_gkrellm");
+	while (_window.isOpen())
 	{
 		sf::Event event;
-		while (window.pollEvent(event))
+		while (_window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				window.close();
+				_window.close();
 		}
-		window.clear();
-		window.draw(shape);
-		window.display();
-//		display(window, sub_windows, modules);
+		_window.clear();
+		display(sub_windows, modules);
+		_window.display();
 	}
 }

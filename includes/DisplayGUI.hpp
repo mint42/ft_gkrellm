@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:02 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 20:18:34 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:21:46 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,19 @@ class					DisplayGUI : virtual public IMonitorDisplay
 		DisplayGUI(const DisplayGUI &other);
 		~DisplayGUI(void);
 		DisplayGUI		&operator=(const DisplayGUI &other);
-		void			display_border(std::string title) const;
-		void			display_graph(std::string title, int info[]) const;
-		void			display_bar(std::string title, unsigned int percentage) const;
-		void			display_line(std::string title) const;
-		void			display_line_2(std::string title, std::string info) const;
-		void			display_cat(int frame) const;
+		void			display_border(std::string title);
+		void			display_graph(std::string title, int info[]);
+		void			display_bar(std::string title, unsigned int percentage);
+		void			display_line(std::string title);
+		void			display_line_2(std::string title, std::string info);
+		void			display_cat(int frame);
 		void			manage_display(std::vector<IMonitorModule*> modules);
 
 	private:
 		unsigned int				_cur_pos;
-		void						display(sf::RenderWindow &window, std::vector<unsigned int> sub_windows, std::vector<IMonitorModule*>modules);
+		sf::RenderWindow			_window;
+		sf::Font					_font;
+		void						display(std::vector<unsigned int> sub_windows, std::vector<IMonitorModule*>modules);
 		std::vector<unsigned int>	make_sub_windows(std::vector<IMonitorModule*> modules);
 };
 

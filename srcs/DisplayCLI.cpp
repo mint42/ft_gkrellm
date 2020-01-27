@@ -6,7 +6,7 @@
 /*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 20:41:24 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 21:35:33 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ DisplayCLI		&DisplayCLI::operator=(const DisplayCLI &other)
 **	Other Member Functions
 */
 
-void			DisplayCLI::display_border(std::string title) const
+void			DisplayCLI::display_border(std::string title)
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
@@ -88,7 +88,7 @@ void			DisplayCLI::display_border(std::string title) const
 	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_graph(std::string title, int info[]) const
+void			DisplayCLI::display_graph(std::string title, int info[])
 
 {
 	unsigned int		cur_height;
@@ -103,7 +103,7 @@ void			DisplayCLI::display_graph(std::string title, int info[]) const
 	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_bar(std::string title, unsigned int percentage) const
+void			DisplayCLI::display_bar(std::string title, unsigned int percentage)
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
@@ -116,7 +116,7 @@ void			DisplayCLI::display_bar(std::string title, unsigned int percentage) const
 	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_line(std::string title) const
+void			DisplayCLI::display_line(std::string title)
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
@@ -129,7 +129,7 @@ void			DisplayCLI::display_line(std::string title) const
 	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_line_2(std::string title, std::string info) const
+void			DisplayCLI::display_line_2(std::string title, std::string info)
 {
 	unsigned int		cur_height;
 	unsigned int		cur_width;
@@ -145,9 +145,9 @@ void			DisplayCLI::display_line_2(std::string title, std::string info) const
 	wrefresh(_cur_win);
 }
 
-void			DisplayCLI::display_cat(int frame) const
-{ unsigned int		height = 1;
-
+void			DisplayCLI::display_cat(int frame)
+{
+	unsigned int		height = 1;
 
     if (frame == 0) {
 		wmove(_cur_win, height, 5);

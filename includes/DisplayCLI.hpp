@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 17:46:54 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 21:36:44 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ class							DisplayCLI : virtual public IMonitorDisplay
 		DisplayCLI(const DisplayCLI &other);
 		~DisplayCLI(void);
 		DisplayCLI				&operator=(const DisplayCLI &other);
-		void					display_border(std::string title) const;
-		void					display_graph(std::string title, int info[]) const;
-		void					display_bar(std::string title, unsigned int percentage) const;
-		void					display_line(std::string title) const;
-		void					display_line_2(std::string title, std::string info) const;
-		void					display_cat(int frame) const;
+		void					display_border(std::string title);
+		void					display_graph(std::string title, int info[]);
+		void					display_bar(std::string title, unsigned int percentage);
+		void					display_line(std::string title);
+		void					display_line_2(std::string title, std::string info);
+		void					display_cat(int frame);
 		void					manage_display(std::vector<IMonitorModule*> modules);
 
 	private:
