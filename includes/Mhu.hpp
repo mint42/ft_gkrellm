@@ -12,6 +12,10 @@ class Mhu : virtual public IMonitorModule{
 		Mhu & operator = (const Mhu &);
 		std::string getMName() const;
 		void execute(IMonitorDisplay *display_mode);
+		unsigned int get_height(void) const;
+
+	protected:
+		unsigned int	_height;
 };
 
 #endif

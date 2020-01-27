@@ -1,6 +1,6 @@
 #include "../includes/Mnt.hpp"
 
-Mnt::Mnt() : _b(true){}
+Mnt::Mnt() : _b(true), _height(3) {}
 
 Mnt::~Mnt(){}
 
@@ -58,4 +58,9 @@ void Mnt::execute(){
 //        pthread_create(&id, NULL, &setS, this);
     }
 	std::cout << _s << std::endl;
+}
+
+unsigned int	Mnt::get_height(void) const
+{
+	return (_height);
 }

@@ -1,6 +1,6 @@
 #include "../includes/Mcat.hpp"
 
-MCat::MCat() : _frame(0){}
+MCat::MCat() : _frame(0), _height(6) {}
 
 MCat::~MCat(){}
 
@@ -34,4 +34,9 @@ void MCat::execute()  {
         std::cout << "    '---''(_/--'  `-'\\_)  " << std::endl;
         _frame = 0;
     }
+}
+
+unsigned int	MCat::get_height(void) const
+{
+	return (_height);
 }

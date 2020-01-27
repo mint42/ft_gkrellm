@@ -4,7 +4,7 @@
 #include "cmd_to_str.hpp"
 #include "Mram.hpp"
 
-Mram::Mram() {}
+Mram::Mram() : _height(3) {}
 
 Mram::~Mram(){}
 
@@ -22,4 +22,9 @@ std::string Mram::getMName() const {
 
 void Mram::execute(IMonitorDisplay * display_mode) {
 	display_mode->display_line_2("RAM", cmd_to_str("sysctl -n hw.memsize"));
+}
+
+unsigned int	Mram::get_height(void) const
+{
+	return (_height);
 }

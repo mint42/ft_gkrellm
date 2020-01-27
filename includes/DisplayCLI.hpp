@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 14:47:05 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 17:17:10 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class							DisplayCLI : virtual public IMonitorDisplay
 	private:
 		WINDOW					*_cur_win;
 		void					display(std::vector<WINDOW*> windows, std::vector<IMonitorModule*> modules);
-		std::vector<WINDOW*>	make_windows(unsigned int nmodules);
+		std::vector<WINDOW*>	make_windows(std::vector<IMonitorModule*> modules);
 };
 
 #endif

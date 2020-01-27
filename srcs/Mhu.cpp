@@ -3,7 +3,7 @@
 #include "cmd_to_str.hpp"
 #include "Mhu.hpp"
 
-Mhu::Mhu() {}
+Mhu::Mhu() : _height(4) {}
 
 Mhu::~Mhu(){}
 
@@ -25,4 +25,9 @@ void Mhu::execute(IMonitorDisplay *display_mode) {
 
 	display_mode->display_line_2("Hostname", hostname);
 	display_mode->display_line_2("Username", getenv("USER"));
+}
+
+unsigned int	Mhu::get_height(void) const
+{
+	return (_height);
 }

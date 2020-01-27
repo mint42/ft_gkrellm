@@ -6,8 +6,11 @@
 
 class MCat : virtual public IMonitorModule{
 	private:
-        int _frame;
-    
+        int 			_frame;
+
+	protected:
+		unsigned int	_height;
+
     public:
 		MCat();
 		~MCat();
@@ -15,6 +18,7 @@ class MCat : virtual public IMonitorModule{
 		MCat & operator = (const MCat &);
 		std::string getMName() const;
 		void execute();
+		unsigned int get_height(void) const;
 };
 
 #endif

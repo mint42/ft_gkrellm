@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 16:33:34 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 17:24:42 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,14 @@ void			DisplayCLI::display_border(std::string title) const
 	wmove(_cur_win, 0, 0);
 	wrefresh(_cur_win);
 
-	start_color();
-	init_pair(1, COLOR_BLACK, COLOR_CYAN);
+//	start_color();
+//	init_pair(1, COLOR_BLACK, COLOR_CYAN);
+//	attron(COLOR_PAIR(1));
+//	box(_cur_win, 0, 0);
+//	touchwin(_cur_win);
 	whline(_cur_win, 0, 80);
 	wrefresh(_cur_win);
+//	attroff(COLOR_PAIR(1));
 	wmove(_cur_win, 0, 2);
 	wrefresh(_cur_win);
 	wprintw(_cur_win, " %s ", title.c_str());
@@ -136,7 +140,10 @@ void			DisplayCLI::display_line_2(std::string title, std::string info) const
 	unsigned int		cur_height;
 	unsigned int		cur_width;
 
-	wprintw(_cur_win, "%s %s", title.c_str(), info.c_str());
+	wprintw(_cur_win, "%s: ", title.c_str());
+	wrefresh(_cur_win);
+
+	wprintw(_cur_win, "%s", info.c_str());
 	wrefresh(_cur_win);
 
 	getyx(_cur_win, cur_height, cur_width);
@@ -160,31 +167,26 @@ void			DisplayCLI::display(std::vector<WINDOW*> windows, std::vector<IMonitorMod
 	}
 }
 
-std::vector<WINDOW*>		DisplayCLI::make_windows(unsigned int nmodules)
+std::vector<WINDOW*>		DisplayCLI::make_windows(std::vector<IMonitorModule*> modules)
 {
-	std::vector<WINDOW*>	windows;
-	unsigned int			win_height;
-	unsigned int			win_width;
-	unsigned int			mod_win_width = 80;
-	unsigned int			mod_win_height;
-	unsigned int			new_start;
+	std::vector<WINDOW*>							windows;
+	unsigned int									mod_width = 80;
+	unsigned int									total_height;
+	std::vector<IMonitorModule*>::const_iterator	it;
+	std::vector<IMonitorModule*>::const_iterator	ite = modules.end();
 
-	getmaxyx(stdscr, win_height, win_width);
-	mod_win_height = (win_height / nmodules) - PADDING;
-//	if (mod_win_height < 5)
-//		error
-	new_start = 1;
-	for (unsigned int i = 0; i < nmodules; i++)
+	total_height = 1;
+	for (it = modules.begin(); it != ite; it++)
 	{
-		windows.push_back(newwin(mod_win_height, mod_win_width, new_start, 1));
-		new_start = new_start + mod_win_height + PADDING;
+		windows.push_back(newwin((*it)->get_height() + PADDING, mod_width, total_height, 1));
+		total_height = total_height + (*it)->get_height() + PADDING;
 	}
 	return (windows);
 }
 
 void			DisplayCLI::manage_display(std::vector<IMonitorModule*> modules)
 {
-	std::vector<WINDOW*>	windows = make_windows(modules.size());
+	std::vector<WINDOW*>	windows = make_windows(modules);
 
 	while (1)
 	{

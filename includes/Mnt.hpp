@@ -7,6 +7,9 @@ class Mnt : virtual public IMonitorModule{
 	private:
         bool _b;
         std::string _s;
+
+	protected:
+		unsigned int	_height;
     
     public:
 		Mnt();
@@ -17,6 +20,7 @@ class Mnt : virtual public IMonitorModule{
 		std::string getMName() const;
 		void execute();
 		std::string getS() const ;
+		unsigned int get_height(void) const;
 };
 
 void *setS(void *);

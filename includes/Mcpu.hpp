@@ -13,6 +13,10 @@ class Mcpu : virtual public IMonitorModule{
 		Mcpu & operator = (const Mcpu &);
 		std::string getMName() const;
 		void execute(IMonitorDisplay *display_mode);
+		unsigned int get_height(void) const;
+
+	protected:
+		unsigned int	_height;
 };
 
 #endif

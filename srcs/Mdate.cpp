@@ -3,7 +3,7 @@
 #include "cmd_to_str.hpp"
 #include "Mdate.hpp"
 
-Mdate::Mdate() {}
+Mdate::Mdate() : _height(3) {}
 
 Mdate::~Mdate(){}
 
@@ -22,4 +22,9 @@ std::string Mdate::getMName() const {
 void Mdate::execute(IMonitorDisplay *display_mode) {
 	time_t t = time(NULL);
 	display_mode->display_line(std::string(ctime(&t)));
+}
+
+unsigned int	Mdate::get_height(void) const
+{
+	return (_height);
 }
