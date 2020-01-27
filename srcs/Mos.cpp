@@ -20,7 +20,7 @@ std::string Mos::getMName() const {
 }
 
 void Mos::execute(IMonitorDisplay *display_mode) {
-	display_mode->display_line(cmd_to_str("sw_vers | grep ProductName"));
-	display_mode->display_line(cmd_to_str("sw_vers | grep ProductVersion"));
-	display_mode->display_line(cmd_to_str("sw_vers | grep BuildVersion"));
+	display_mode->display_line(cmd_to_str("sw_vers | grep ProductName | tr '\t' ' '"));
+	display_mode->display_line(cmd_to_str("sw_vers | grep ProductVersion | tr '\t' ' '"));
+	display_mode->display_line(cmd_to_str("sw_vers | grep BuildVersion | tr '\t' ' '"));
 }
