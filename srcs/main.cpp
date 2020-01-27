@@ -6,11 +6,10 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 17:34:10 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 18:36:21 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.hpp"
 #include "IMonitorDisplay.hpp"
 #include "DisplayCLI.hpp"
 #include "DisplayGUI.hpp"
@@ -27,6 +26,7 @@
 #include <vector>
 #include <curses.h>
 
+#include "config.hpp"
 #define OP_HU 1
 #define OP_OS 2
 #define OP_DT 3
@@ -38,7 +38,20 @@
 
 // usage
 
-#define USAGE "./ft_gkrellm [--cli/--gui] [Module ID]"
+static void		show_usage(void)
+{
+	std::cout << "./ft_gkrellm [--cli/--gui] [ModuleID#] ..." << std::endl;
+	std::cout << std::endl;
+	std::cout << "ID   MODULE" << std::endl;
+	std::cout << OP_HU <<  "    " << MOD_HU << std::endl;
+	std::cout << OP_OS <<  "    " << MOD_OS << std::endl;
+	std::cout << OP_DT <<  "    " << MOD_DT << std::endl;
+	std::cout << OP_CPU << "    " << MOD_CPU << std::endl;
+	std::cout << OP_RAM << "    " << MOD_RAM << std::endl;
+	std::cout << OP_NET << "    " << MOD_NET << std::endl;
+	std::cout << OP_CAT << "    " << MOD_CAT << std::endl;
+	std::cout << std::endl;
+}
 
 #include <cstdlib>
 
@@ -56,7 +69,7 @@ static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
 	int									param;
 
 	if (argc <= 1)
-		throw (std::string(USAGE));
+		throw (std::string("bad"));
 	for (int i = 1; i < argc; i++)
 	{
 		param = std::atoi(argv[i]);
@@ -99,7 +112,7 @@ static std::vector<IMonitorModule*>	parse_input(int argc, char **argv)
 			}
 			default:
 			{
-				throw (std::string(USAGE));
+				throw (std::string("bad"));
 				break ;
 			}
 		}
@@ -124,7 +137,8 @@ int								main(int argc, char **argv)
 	}
 	catch (std::string msg)
 	{
-		std::cout << msg << std::endl;
+		(void)msg;
+		show_usage();
 		return (1);
 	}
 	run(modules);
