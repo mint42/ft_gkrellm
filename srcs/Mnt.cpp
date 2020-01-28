@@ -1,5 +1,6 @@
 #include "Mnt.hpp"
 #include "cmd_to_str.hpp"
+#include "config.hpp"
 
 Mnt::Mnt() : _height(3) {}
 
@@ -14,7 +15,7 @@ Mnt & Mnt::operator = (const Mnt &) {
 }
 
 std::string Mnt::getMName() const {
-	return "Network throughput:";
+	return MOD_NET;
 }
 
 void Mnt::execute(IMonitorDisplay *display_mode)

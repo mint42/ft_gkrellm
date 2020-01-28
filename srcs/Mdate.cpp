@@ -21,7 +21,10 @@ std::string Mdate::getMName() const {
 
 void Mdate::execute(IMonitorDisplay *display_mode) {
 	time_t t = time(NULL);
-	display_mode->display_line(std::string(ctime(&t)));
+	std::string	dt(ctime(&t));
+
+	dt.erase(std::remove(dt.begin(), dt.end(), '\n'), dt.end());
+	display_mode->display_line(dt);
 }
 
 unsigned int	Mdate::get_height(void) const

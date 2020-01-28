@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:02 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 22:30:35 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:51:08 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			DisplayGUI::display_line_2(std::string title, std::string info)
 	_window.draw(text);
 	text_info.setFont(_font);
 	text_info.setString(info);
-	text_info.setPosition(text.getLocalBounds().width * 5, _cur_pos);
+	text_info.setPosition(text.getLocalBounds().width * 3, _cur_pos);
 	_window.draw(text_info);
 
 	_cur_pos += (text.getLocalBounds().height * 2);
@@ -113,12 +113,13 @@ void			DisplayGUI::display(std::vector<unsigned int> sub_windows, std::vector<IM
 	std::vector<IMonitorModule*>::const_iterator	ite = modules.end();
 	std::vector<unsigned int>::const_iterator		wit = sub_windows.begin();
 
+	_cur_pos = 1;
 	for (it = modules.begin(); it != ite; it++)
 	{
-		_cur_pos = *wit;
 		display_border((*it)->getMName());
 		(*it)->execute(this);
 		++wit;
+		_cur_pos += 40;
 	}
 }
 

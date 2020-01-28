@@ -1,5 +1,6 @@
 #include "Mcat.hpp"
 #include "IMonitorDisplay.hpp"
+#include "config.hpp"
 
 Mcat::Mcat() : _frame(0), _height(6) {}
 
@@ -17,7 +18,7 @@ Mcat & Mcat::operator = (const Mcat &rhs) {
 }
 
 std::string Mcat::getMName() const {
-	return "Cat!:";
+	return MOD_CAT;
 }
 
 void Mcat::execute(IMonitorDisplay *display_mode) {

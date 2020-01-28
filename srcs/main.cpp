@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 20:30:42 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/26 23:27:04 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,6 @@ static IMonitorDisplay				*parse_flag(int argc, char **argv)
 
 static std::vector<IMonitorModule*>	parse_args(int argc, char **argv)
 {
-	static std::string				all_modules[] =
-	{
-		MOD_HU,
-		MOD_OS,
-		MOD_DT,
-		MOD_CPU,
-		MOD_RAM,
-	};
 	std::vector<IMonitorModule*>		cur_modules;
 	int									param;
 
