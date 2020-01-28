@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 10:02:03 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 22:42:26 by rreedy           ###   ########.fr       */
+/*   Created: 2020/01/27 20:11:37 by rreedy            #+#    #+#             */
+/*   Updated: 2020/01/27 20:12:23 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #define MOD_RAM "RAM Load"
 #define MOD_NET "Network Throughput"
 #define MOD_CAT "KITTY CAT"
+#define MOD_IP "GRAPHICS"
+#define MOD_SERIAL "SERIAL"
 
 // End Config
 

@@ -4,7 +4,7 @@
 #include "cmd_to_str.hpp"
 #include "Mram.hpp"
 
-Mram::Mram() : _height(3) {}
+Mram::Mram() : _height(4) {}
 
 Mram::~Mram(){}
 

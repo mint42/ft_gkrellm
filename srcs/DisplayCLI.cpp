@@ -6,7 +6,7 @@
 /*   By: bpace <bpace@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:13:05 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 23:04:42 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/27 20:46:50 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,17 @@ void			DisplayCLI::display_border(std::string title)
 	wmove(_cur_win, 0, 0);
 	wrefresh(_cur_win);
 
-//	start_color();
-//	init_pair(1, COLOR_BLACK, COLOR_CYAN);
-//	wattron(_cur_win, COLOR_PAIR(1));
-//	box(_cur_win, 0, 0);
-//	touchwin(_cur_win);
-	whline(_cur_win, 0, 80);
+	start_color();
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	wattron(_cur_win, COLOR_PAIR(1));
+    box(_cur_win, 0, 0);
+    touchwin(_cur_win);
 	wrefresh(_cur_win);
-//	attroff(COLOR_PAIR(1));
+	wattroff(_cur_win, COLOR_PAIR(1));
 	wmove(_cur_win, 0, 2);
 	wrefresh(_cur_win);
 	wprintw(_cur_win, " %s ", title.c_str());
 	wrefresh(_cur_win);
-
 	getyx(_cur_win, cur_height, cur_width);
 	wmove(_cur_win, cur_height + 2, 3);
 	wrefresh(_cur_win);
@@ -147,50 +145,55 @@ void			DisplayCLI::display_line_2(std::string title, std::string info)
 
 void			DisplayCLI::display_cat(int frame)
 {
-	unsigned int		height = 2;
+	unsigned int		cur_height = 2;
+	unsigned int		cur_width = 5;
 
     if (frame == 0) {
-		wmove(_cur_win, height, 5);
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "      |\\      _,,,---,,_     ");
 		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
+		++cur_height;
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "ZZZzz /,`.-'`'    -.  ;-;;,_ ");
 		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
+		++cur_height;
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "     |,4-  ) )-,_. ,\\ (  `'-'");
 		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
+		++cur_height;
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "    '---''(_/--'  `-'\\_)     ");
 		wrefresh(_cur_win);
     }
     else {
-		wmove(_cur_win, height, 5);
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "       /|                    ");
 		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
+		++cur_height;
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "zzzZZ /,`.-'`'\u00AF'''\u00AF\u00AF\u00AF';-;;,_ ");
 		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
+		++cur_height;
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "     |,4-  ) )-,_. ,\\ (\u00AF `'-'");
 		wrefresh(_cur_win);
-		++height;
-		wmove(_cur_win, height, 5);
+		++cur_height;
+		wmove(_cur_win, cur_height, cur_width);
 		wrefresh(_cur_win);
         wprintw(_cur_win, "    '---''(_/--'  `-'\\_)  ");
 		wrefresh(_cur_win);
     }
+
+	getyx(_cur_win, cur_height, cur_width);
+	wmove(_cur_win, cur_height + 1, 3);
+	wrefresh(_cur_win);
 }
 
 void			DisplayCLI::display(std::vector<WINDOW*> windows, std::vector<IMonitorModule*>modules)

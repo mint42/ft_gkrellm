@@ -6,7 +6,7 @@
 /*   By: rreedy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 04:39:56 by rreedy            #+#    #+#             */
-/*   Updated: 2020/01/26 23:27:04 by rreedy           ###   ########.fr       */
+/*   Updated: 2020/01/27 20:26:54 by rreedy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "Mram.hpp"
 #include "Mnt.hpp"
 #include "Mcat.hpp"
+#include "Mip.hpp"
+#include "Mserial.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -34,26 +36,26 @@
 #define OP_RAM 5
 #define OP_NET 6
 #define OP_CAT 7
-#define NMODS 7
-
-// usage
+#define OP_IP 8
+#define OP_SERIAL 9
+#define NMODS 9
 
 static void		show_usage(void)
 {
 	std::cout << "./ft_gkrellm [--cli/--gui] [ModuleID#] ..." << std::endl;
 	std::cout << std::endl;
 	std::cout << "ID   MODULE" << std::endl;
-	std::cout << OP_HU <<  "    " << MOD_HU << std::endl;
-	std::cout << OP_OS <<  "    " << MOD_OS << std::endl;
-	std::cout << OP_DT <<  "    " << MOD_DT << std::endl;
-	std::cout << OP_CPU << "    " << MOD_CPU << std::endl;
-	std::cout << OP_RAM << "    " << MOD_RAM << std::endl;
-	std::cout << OP_NET << "    " << MOD_NET << std::endl;
-	std::cout << OP_CAT << "    " << MOD_CAT << std::endl;
+	std::cout << OP_HU     << "    " << MOD_HU << std::endl;
+	std::cout << OP_OS     << "    " << MOD_OS << std::endl;
+	std::cout << OP_DT     << "    " << MOD_DT << std::endl;
+	std::cout << OP_CPU    << "    " << MOD_CPU << std::endl;
+	std::cout << OP_RAM    << "    " << MOD_RAM << std::endl;
+	std::cout << OP_NET    << "    " << MOD_NET << std::endl;
+	std::cout << OP_CAT    << "    " << MOD_CAT << std::endl;
+	std::cout << OP_IP     << "    " << MOD_IP << std::endl;
+	std::cout << OP_SERIAL << "    " << MOD_SERIAL << std::endl;
 	std::cout << std::endl;
 }
-
-#include <cstdlib>
 
 static IMonitorDisplay				*parse_flag(int argc, char **argv)
 {
@@ -113,6 +115,16 @@ static std::vector<IMonitorModule*>	parse_args(int argc, char **argv)
 			{
 				cur_modules.push_back(new Mcat());
 				break ;
+			}
+			case OP_IP:
+			{
+				cur_modules.push_back(new Mip());
+				break;
+			}
+			case OP_SERIAL:
+			{
+				cur_modules.push_back(new Mserial());
+				break;
 			}
 			default:
 			{

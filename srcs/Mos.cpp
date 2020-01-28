@@ -3,7 +3,7 @@
 #include "cmd_to_str.hpp"
 #include "Mos.hpp"
 
-Mos::Mos() : _height(5) {}
+Mos::Mos() : _height(6) {}
 
 Mos::~Mos(){}
 

@@ -3,7 +3,7 @@
 #include "cmd_to_str.hpp"
 #include "Mdate.hpp"
 
-Mdate::Mdate() : _height(3) {}
+Mdate::Mdate() : _height(4) {}
 
 Mdate::~Mdate(){}
 

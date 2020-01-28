@@ -6,7 +6,7 @@
 #    By: rreedy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/13 11:34:50 by rreedy            #+#    #+#              #
-#    Updated: 2020/01/26 19:48:57 by rreedy           ###   ########.fr        #
+#    Updated: 2020/01/27 20:56:04 by rreedy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS) Makefile config.mk
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
+	$(CXX) -g $(CXXFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
 
 #
 # $(LIB):

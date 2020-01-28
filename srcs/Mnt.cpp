@@ -2,7 +2,7 @@
 #include "cmd_to_str.hpp"
 #include "config.hpp"
 
-Mnt::Mnt() : _height(3) {}
+Mnt::Mnt() : _height(4) {}
 
 Mnt::~Mnt(){}
 

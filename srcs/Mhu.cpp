@@ -3,7 +3,7 @@
 #include "cmd_to_str.hpp"
 #include "Mhu.hpp"
 
-Mhu::Mhu() : _height(4) {}
+Mhu::Mhu() : _height(5) {}
 
 Mhu::~Mhu(){}
 

@@ -2,7 +2,7 @@
 #include "IMonitorDisplay.hpp"
 #include "config.hpp"
 
-Mcat::Mcat() : _frame(0), _height(6) {}
+Mcat::Mcat() : _frame(0), _height(7) {}
 
 Mcat::~Mcat(){}
 
